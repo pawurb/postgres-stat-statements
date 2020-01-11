@@ -168,9 +168,9 @@ ENV PGDATA /var/lib/postgresql/data
 RUN mkdir -p "$PGDATA" && chown -R postgres:postgres "$PGDATA" && chmod 777 "$PGDATA"
 VOLUME /var/lib/postgresql/data
 
-RUN echo "shared_preload_libraries = 'pg_stat_statements'" >> $PGDATA/postgresql.conf
-RUN echo "pg_stat_statements.max = 10000" >> $PGDATA/postgresql.conf
-RUN echo "pg_stat_statements.track = all" >> $PGDATA/postgresql.conf
+RUN echo "shared_preload_libraries = 'pg_stat_statements'" >> /var/lib/postgresql/data/postgresql.conf
+RUN echo "pg_stat_statements.max = 10000" >> /var/lib/postgresql/data/postgresql.conf
+RUN echo "pg_stat_statements.track = all" >> /var/lib/postgresql/data/postgresql.conf
 
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN ln -s usr/local/bin/docker-entrypoint.sh / # backwards compat
